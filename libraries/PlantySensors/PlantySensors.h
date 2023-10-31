@@ -2,14 +2,21 @@
 #define PlantySensors_h
 
 #include "Arduino.h"
-#include "jsonManager.h"
-#include <BluetoothSerial.h>
+#include "BluetoothSerial.h"
+#include "WiFi.h"
+#include "ArduinoJson.h"
+#include "HTTPClient.h"
+
+extern DynamicJsonDocument planty;
+extern const char* id;
 
 class PlantySensors {
 public:
   PlantySensors(BluetoothSerial& bt, int offset);
   void setupSensors();
   void readSensors();
+  void sendSensorDataToAPI();
+  bool isUUID(const char* str);
 
 private:
   BluetoothSerial& SerialBT;
