@@ -6,21 +6,37 @@
 #include "WiFi.h"
 #include "ArduinoJson.h"
 #include "HTTPClient.h"
+#include "WiFiClientSecure.h"
+#include "EEPROM.h"
+
+
 
 extern DynamicJsonDocument planty;
 extern const char* id;
+extern int sensorl;
+extern const int addressForSSID;
+extern const int addressForPassword;
+extern char ssid[64];
+extern char password[64];
 
 class PlantySensors {
 public:
+  void retrieveStoredCredentials();
   PlantySensors(BluetoothSerial& bt, int offset);
-  void setupSensors();
+  void connectToWiFi();
+  bool isCredentialsValid();
   void readSensors();
   void sendSensorDataToAPI();
+  /*void putSensorData(const char* apiEndpoint);*/
   bool isUUID(const char* str);
+  
+ 
+  
 
 private:
   BluetoothSerial& SerialBT;
   int sensor_offset;
+  DynamicJsonDocument dataJson;
 };
 
 class SensorData {
