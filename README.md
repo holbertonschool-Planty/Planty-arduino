@@ -1,5 +1,5 @@
 # Planty Arduino 
-`Version: 2.0.0`
+`Version: 3.0.0`
 ### **Planty Arduino** is a project that utilizes an Arduino board to collect sensor data, convert it to JSON format, serialize the data, and transmit it through a Bluetooth connection. Follow these steps to set up and use the project:  
 
 ## Table of Contents 
@@ -105,7 +105,10 @@ This function sends the sensor data to an API via an HTTP POST request. It seria
 PlantySensors::isUUID(const char* str)
 ```
 This function checks if a given string is a valid UUID. It verifies the length and character format of the input string.
-
+```
+PlantySensors::connectToWiFi()
+```
+This function attempts to connect to a Wi-Fi network using stored credentials. It checks the validity of the credentials, and if they are valid, it tries to establish a Wi-Fi connection. It prints messages to the serial port indicating the connection status, and if the connection is successful, it stores the credentials in EEPROM for future use. If the credentials are not valid or not stored, it outputs an appropriate message.
 ## Wi-Fi Connection
 The Planty Arduino project includes a Wi-Fi connection feature. Here's how it works:
 
@@ -141,6 +144,7 @@ Planty-arduino/
 ├── libraries/
 │   ├── ArduinoJson/
 │   ├── BluetoothSerial/
+│   ├── EEPROM-Storage/
 │   ├── EspSoftwareSerial/
 │   ├── PantySensors/
 │       ├── PlantySensors.h
